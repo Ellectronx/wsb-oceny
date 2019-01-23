@@ -10,10 +10,10 @@ Obecnie jako *proof-of-concept*.
 	pip3 install -U selenium
 	gecodriver
 
-<b>Geckodriver:</b>
-a) pobrać właściwy sterownik https://github.com/mozilla/geckodriver/releases
-b) rozpakować
-c) skopiować wypakowany sterownik do /usr/local/bin   (dotyczy Linux)
+<b>Geckodriver:</b><br>
+a) pobrać właściwy sterownik https://github.com/mozilla/geckodriver/releases<br>
+b) rozpakować<br>
+c) skopiować wypakowany sterownik do /usr/local/bin   (dotyczy Linux)<br>
 
 # Konfiguracja
 Plik <b>credent_empty.py</b> należy uzpupełnić danymi do logowania do Extranetu, SMTP i zmienić jego nazwę na <b>credent.py</b>
