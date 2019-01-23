@@ -19,6 +19,7 @@ from bs4 import BeautifulSoup
 
 import db
 from sendEmail import *
+from credent import secret
 
 def main():
 
@@ -42,8 +43,8 @@ def main():
     # Clear the input fields
     user.clear()
     password.clear()
-    user.send_keys("gax30800")
-    password.send_keys("Electron26")
+    user.send_keys(secret["wsb_login"])
+    password.send_keys(secret["wsb_password"])
     
     #PRESS LOGIN BUTTON
     browser.find_element_by_id("login_button").click()
