@@ -1,12 +1,5 @@
 #!/usr/bin/env python
-#
-# Author: Tomas (www.lisenet.com)
-#
-# CHANGELOG
-#
-# [v0.1] - 2013
-# Initial release, script uses one hardcoded URL
-#
+# main script from: https://www.lisenet.com/2017/basic-python-script-to-log-in-to-website-using-selenium-webdriver/
 
 import os
 import time
@@ -18,7 +11,7 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 
 import db
-from sendEmail import *
+from helper import *
 from credent import secret
 
 def main():
@@ -52,10 +45,6 @@ def main():
     time.sleep(5)
     browser.get(url)
     html = browser.page_source
-
-    
-    #with open('plik.html', 'r') as myfile:
-    #    html = myfile.read()
 
     soup = BeautifulSoup(html,features="lxml")
 
@@ -93,17 +82,27 @@ def main():
 
     #rows_diff = db.select_oceny(conn,"oceny_nowe")
     print("\n\n\nROW DIFF:")
-    rows_diff = db.select_diff(conn)
-    #print(rows_diff)
+    rows_diff = db.select_diff(conn)#print(rows_diff)
+    
     ID=[]
     for row in rows_diff:
-        strx=""
-        for txt in row:
-            strx = strx + txt + " | "
         ID.append(row[0])
-        print(strx)
+        #print(strx)
 
-    print(ID)
+    #print(ID)
+    #comparison_result=[]
+    message_content=""
+    for idx in ID:
+        T1 = db.select_przedmiot(conn,"oceny",idx)
+        T2 = db.select_przedmiot(conn,"oceny_nowe",idx)
+        cr = compareT(T1,T2)
+        message_content = message_content + cr + "\r\n"
+
+    print("message_content:"+message_content)
+
+    if message_content !="": 
+        sendEmail("Powiadomienie o ocenach WSB",secret["email_from"],secret["email_to"],message_content)
+    
     #datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     db.oceny_copy(conn)
@@ -111,7 +110,6 @@ def main():
 
     conn.commit()
     conn.close()
-    #sendEmail("TEST","auto@danilewicz.com","l.danilewicz@gmail.com","TEST lalala")
 
 
     file = open("plik.html","w") 
@@ -129,6 +127,9 @@ def main():
     browser.delete_all_cookies()
     browser.close()
     killXvfb()
+
+
+
 
 def killXvfb():
     p = subprocess.Popen(['ps', '-A'],

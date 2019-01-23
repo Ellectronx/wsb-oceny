@@ -71,6 +71,16 @@ def query(conn,query):
     cur = conn.cursor()
     cur.execute(query)
 
+def select_przedmiot(conn,table,id):
+    cur = conn.cursor()#print("TABLE: "+table)
+    cur.execute("SELECT * FROM "+table+" WHERE id='"+id+"'")
+
+    row = cur.fetchone()
+    if row is None:
+        return ()
+    else:
+        return row
+
 def select_oceny(conn,table):
     cur = conn.cursor()#print("TABLE: "+table)
     cur.execute("SELECT * FROM "+table)
