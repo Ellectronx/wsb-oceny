@@ -1,5 +1,5 @@
 secret = {
-	'url_oceny' 	: '',
+	'url_oceny' 	: 'https://portal.wsb.pl/group/gdansk/oceny-wstepne',
     'wsb_login' 	: '',
     'wsb_password' 	: '',
     'email_from'	: '',

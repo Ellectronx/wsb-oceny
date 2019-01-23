@@ -5,6 +5,7 @@ Skrypt z założenia powinien być uruchamiany za pomocą crontab, także na ser
 Obecnie jako *proof-of-concept*.
 
 # Zależności
+    apt-get install xvfb
 	apt-get install firefox-esr
 	pip3 install beautifulsoup4
 	pip3 install -U selenium
