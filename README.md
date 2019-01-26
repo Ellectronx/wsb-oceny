@@ -14,20 +14,20 @@ Obecnie jako *proof-of-concept*.
 <b>Geckodriver:</b><br>
 a) pobrać właściwy sterownik https://github.com/mozilla/geckodriver/releases<br>
 b) rozpakować<br>
-c) skopiować wypakowany sterownik do /usr/local/bin   (dotyczy Linux)<br>
+c) skopiować wypakowany sterownik do /usr/bin   (dotyczy Linux)<br>
 
 # Konfiguracja
 Plik <b>credent_empty.py</b> należy uzpupełnić danymi do logowania do Extranetu, SMTP i zmienić jego nazwę na <b>credent.py</b>
 
-    'url_oceny' 	: '',
-    'wsb_login' 	: '',
-    'wsb_password' 	: '',
-    'email_from'	: '',
-    'email_to'		: '',
-    'smtp_login'	: '',
-    'smtp_password'	: '',
-    'smtp_host'		: '',
-    'smtp_port'		: 587
+    'url_oceny': '',
+    'wsb_login': '',
+    'wsb_password': '',
+    'email_from': '',
+    'email_to': '',
+    'smtp_login': '',
+    'smtp_password': '',
+    'smtp_host': '',
+    'smtp_port': 587
 
 # Użycie
 python oceny.py
