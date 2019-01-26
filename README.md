@@ -1,15 +1,17 @@
 # wsb-oceny
-Powiadomienia e-mail o nowych ocenach z Extranetu WSB.
+Powiadomienia e-mail oraz Messenger(FB) o nowych ocenach z Extranetu WSB.
 Skrypt z założenia powinien być uruchamiany za pomocą crontab, także na serwerach bez interfejsu graficznego.
 
 Obecnie jako *proof-of-concept*.
 
 # Zależności
     apt-get install xvfb
-	apt-get install firefox-esr
-	pip3 install beautifulsoup4
-	pip3 install -U selenium
-	gecodriver
+    apt-get install fbchat
+    apt-get install firefox-esr
+    pip install beautifulsoup4
+    pip install -U selenium
+    
+    gecodriver
 
 <b>Geckodriver:</b><br>
 a) pobrać właściwy sterownik https://github.com/mozilla/geckodriver/releases<br>
