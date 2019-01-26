@@ -27,7 +27,10 @@ Plik <b>credent_empty.py</b> należy uzpupełnić danymi do logowania do Extrane
     'smtp_login': '',
     'smtp_password': '',
     'smtp_host': '',
-    'smtp_port': 587
+    'smtp_port': 587,
+    'fb_login' : '',
+    'fb_password': '',
+    'fb_thread_id': ''
 
 # Użycie
 python oceny.py
