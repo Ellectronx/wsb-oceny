@@ -6,6 +6,7 @@ from email.message import EmailMessage
 from credent import secret
 
 
+
 tb_headers=["id","przedmiot","wykladowca","forma_zaliczenia","rodz_zajec","ocena1","data1","ocena2","data2"]
 
 def sendEmail(subject,eml_from,eml_to,message):
@@ -31,24 +32,31 @@ def sendEmail(subject,eml_from,eml_to,message):
         print("...sending email: somethin went wrong:(")
 
 
-def compareT(T1,T2):
+def preetyGrade(grade):
+    if grade=="-":
+        return "brak"
+    else:
+        return str(grade)
+
+
+def compareT(T1,T2):  #T1,T2 krotka z wierszem z bazy danych (wiersz tabeli z ocenami starymi/nowymi)
     lenT1 = len(T1)
     lenT2 = len(T2)
 
     if lenT1!=9 and lenT2!=9:
-        return "Błąd E1. Nieodpowiednia ilość kolumn."
+        return {"private":"Błąd E1. Nieodpowiednia ilość kolumn. Być może zmeniła się struktura strony źródłowej ?!","public":""}
 
     if lenT2 > lenT1 and lenT1==0:
-        return "Dopisano nowy przedmiot: "+T2[1]
+        return {"private":"Dopisano nowy przedmiot: "+T2[1],"public":""}
 
     if lenT1 == lenT2 and lenT1 == 9:
         zm=""
         L = len(T1)
         for i in range(0,L):
             if(T1[i]!=T2[i]):
-                zm = zm +" zmiana "+tb_headers[i]+" z "+str(T1[i])+" na "+str(T2[i])+", "
+                zm = zm +"\r\nZmiana "+tb_headers[i]+" z "+preetyGrade(T1[i])+" na "+preetyGrade(T2[i])+", "
         if len(zm)>1:
             zm = zm[:-2]
-        return "Przedmiot: "+T2[1]+zm
+        return {"private":"Przedmiot: "+T1[1]+" ("+T1[3]+", "+T1[2]+")"+zm, "public":"Możliwa nowe oceny z przedmiotu: "+T1[1]+" ("+T1[3]+", "+T1[2]+") [powiadomienie automatyczne, grupa WZ_INiN3_PG2]"}
 
-    return "Nieokreślony błąd. Być może zmeniła się struktura strony źródłowej ?!"
+    return {"private":"Nieokreślony błąd. Być moze załadowane zostały przedmioty z nowego semestru lub zmeniła się struktura strony źródłowej ?!","public":""}

@@ -7,5 +7,8 @@ secret = {
     'smtp_login'	: '',
     'smtp_password'	: '',
     'smtp_host'		: '',
-    'smtp_port'		: 587
+    'smtp_port'		: 587,
+    'fb_login'  	: '',
+    'fb_password' 	: '',
+    'fb_thread_id' 	: ''
 }

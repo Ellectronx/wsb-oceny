@@ -11,6 +11,7 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 
 import db
+import fb
 from helper import *
 from credent import secret
 
@@ -91,17 +92,22 @@ def main():
 
     #print(ID)
     #comparison_result=[]
-    message_content=""
+    private_content=""
+    public_content=""
     for idx in ID:
         T1 = db.select_przedmiot(conn,"oceny",idx)
         T2 = db.select_przedmiot(conn,"oceny_nowe",idx)
         cr = compareT(T1,T2)
-        message_content = message_content + cr + "\r\n"
+        private_content = private_content + cr["private"] + "\r\n\r\n"
+        public_content  = public_content  + cr["public"] + "\r\n\r\n"
 
-    print("message_content:"+message_content)
+    print("private_content:"+private_content)
 
-    if message_content !="": 
-        sendEmail("Powiadomienie o ocenach WSB",secret["email_from"],secret["email_to"],message_content)
+    if private_content !="": 
+        sendEmail("Powiadomienie o ocenach WSB",secret["email_from"],secret["email_to"],private_content)
+
+    if public_content !="": 
+        fb.sendMessage(public_content)
     
     #datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
